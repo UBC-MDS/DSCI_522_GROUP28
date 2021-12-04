@@ -239,6 +239,18 @@
     <a class="reference internal nav-link" href="#run-analysis-end-to-end">
      Run analysis end to end
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#option-1-using-gnu-make">
+       Option 1: Using GNU make
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#option-2-using-runner-sh">
+       Option 2: Using runner.sh
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#optional-run-individual-script">
@@ -353,12 +365,39 @@
 conda activate abalone
 </pre></div>
 </div>
+<p>Alterantively, following commands can be used.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make create_env
+conda activate abalone
+</pre></div>
+</div>
+<p><strong>Note:</strong> If you are on Windows, you might have to run following commands to make the <code class="docutils literal notranslate"><span class="pre">altair</span></code> and <code class="docutils literal notranslate"><span class="pre">altair_saver</span></code> work as expected.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm install -g vega vega-cli vega-lite canvas
+</pre></div>
+</div>
 </div>
 <div class="section" id="run-analysis-end-to-end">
 <h3>Run analysis end to end<a class="headerlink" href="#run-analysis-end-to-end" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="option-1-using-gnu-make">
+<h4>Option 1: Using GNU make<a class="headerlink" href="#option-1-using-gnu-make" title="Permalink to this headline">¶</a></h4>
+<p>To run the analysis end to end, run the following commands in a Terminal/Command Prompt from the project root directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make clean <span class="c1"># to clean the analysis output files</span>
+
+make all <span class="c1"># to reproduce the analysis end to end</span>
+</pre></div>
+</div>
+<p>Individual steps can also be executed using <code class="docutils literal notranslate"><span class="pre">make</span></code> command. For example - following command runs <code class="docutils literal notranslate"><span class="pre">data_download.py</span></code> script and save the output file to disk. To see all the targets/steps, please refer the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make data/raw/abalone.data
+</pre></div>
+</div>
+<p>Please clean the target directories before invoking <code class="docutils literal notranslate"><span class="pre">make</span></code> command. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> can be used to clean all the intermediate files and results.</p>
+</div>
+<div class="section" id="option-2-using-runner-sh">
+<h4>Option 2: Using <a class="reference external" href="http://runner.sh">runner.sh</a><a class="headerlink" href="#option-2-using-runner-sh" title="Permalink to this headline">¶</a></h4>
 <p>To run the analysis end to end, run the script <code class="docutils literal notranslate"><span class="pre">runner.sh</span></code> in a Terminal/Command Prompt from the project root directory as follows. Script <code class="docutils literal notranslate"><span class="pre">runner.sh</span></code> runs each individual script one at a time.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nohup bash runner.sh &gt; runner.log <span class="p">&amp;</span>
 </pre></div>
+</div>
+<p>Log file <code class="docutils literal notranslate"><span class="pre">runner.log</span></code> logs all the steps and can be used for debugging the script.</p>
 </div>
 </div>
 <div class="section" id="optional-run-individual-script">
