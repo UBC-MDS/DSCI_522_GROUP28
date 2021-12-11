@@ -350,10 +350,15 @@
 <h3>Option 1: Using <code class="docutils literal notranslate"><span class="pre">docker</span></code><a class="headerlink" href="#option-1-using-docker" title="Permalink to this headline">¶</a></h3>
 <p>To run this analysis using Docker, clone/download this repository, use the command line to navigate to the root of this project on your computer, and then type the following (filling in PATH_ON_YOUR_COMPUTER with the absolute path to the root of this project on your computer).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean output directories and results</span>
-docker run --privileged  --rm -it -v /<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/abalone veerupandey/abalone_age_classification make -C /home/abalone clean
+docker run --rm -v /<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/abalone veerupandey/abalone_age_classification make -C /home/abalone clean
 
 <span class="c1"># Run the Analysis</span>
-docker run --privileged  --rm -it -p <span class="m">8000</span>:8000 -v /<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/abalone veerupandey/abalone_age_classification make -C /home/abalone all
+<span class="c1"># Flag `--it` is here for a purpose</span>
+docker run --rm -it -p <span class="m">8000</span>:8000 -v /<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/abalone veerupandey/abalone_age_classification make -C /home/abalone all
+</pre></div>
+</div>
+<p>As a simple python webserver will be started at port 8000 to serve analysis html web page, flag <code class="docutils literal notranslate"><span class="pre">-it</span></code> will help to debug and close the session. Docker can also run in detach mode with flag <code class="docutils literal notranslate"><span class="pre">-d</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --rm -d -p <span class="m">8000</span>:8000 -v /<span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/home/abalone veerupandey/abalone_age_classification make -C /home/abalone all
 </pre></div>
 </div>
 <p>Report can be accessed in local machine by accessing <a class="reference external" href="http://localhost:8000">http://localhost:8000</a> in any of the modern web browser.</p>
@@ -410,11 +415,11 @@ conda activate abalone
 </div>
 <div class="section" id="flow-chart">
 <h2>Flow Chart<a class="headerlink" href="#flow-chart" title="Permalink to this headline">¶</a></h2>
-<p><img alt="Flowchart" src="images/flowchart.png" /></p>
+<p><img alt="Flowchart" src="_images/flowchart.png" /></p>
 </div>
 <div class="section" id="project-structure">
 <h2>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h2>
-<p><img alt="Project Structure" src="images/project_org.png" /></p>
+<p><img alt="Project Structure" src="_images/project_org.png" /></p>
 </div>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
